@@ -4,6 +4,7 @@ import { ImCross } from "react-icons/im";
 import { useNavigate } from 'react-router-dom';  
 import Button from './Button';
 import Socials from './Socials';
+import Logo from '../assets/images/LogoBm.png'
 
 const LandingNavbar = () => {
     const navList = [
@@ -35,7 +36,7 @@ const LandingNavbar = () => {
     return (
         <nav className="sticky top-0 z-10 max-w-full flex justify-between items-center bg-sangGreen h-20 rounded-bl-3xl rounded-br-3xl">
             <div className="logo flex justify-between items-center w-full md:w-auto">
-                <img className="h-24 w-24 ml-5 mb-2" src="src/assets/images/LogoBm.png" alt="logo" />
+                <img className="h-24 w-24 ml-5 mb-2" src={Logo} alt="logo" />
                 {isOpen ? 
                     <ImCross onClick={toggle} className="md:hidden text-white text-2xl mr-7" /> :
                     <FaAlignRight onClick={toggle} className="md:hidden text-white text-3xl mr-7" />
