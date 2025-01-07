@@ -3,6 +3,7 @@ import Button from './Button';
 import { motion } from 'framer-motion';
 import { fadeIn } from '../variants';
 import { useNavigate } from 'react-router-dom';
+import HomeDogImage from '../assets/images/bg-img2.png'
 
 const Home = () => {
     const navigate = useNavigate();
@@ -20,7 +21,7 @@ const Home = () => {
 
             <img
                 className="absolute right-0 top-[98px] z-[-10] hidden md:block h-[20rem] w-60 md:w-[550px] md:h-[40rem]"
-                src="/src/assets/images/bg-img2.png"
+                src={HomeDogImage}
                 alt="Dog Image Desktop"
             />
 
