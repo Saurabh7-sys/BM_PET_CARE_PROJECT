@@ -5,6 +5,7 @@ import { fadeIn } from '../variants';
 import { useNavigate } from 'react-router-dom';
 import HomeDogImage from '../assets/images/bg-img2.png'
 import HomePhoneImg from '../assets/images/appointmentDog.png'
+import orangeBolb from '../assets/images/BlobShape.png'
 
 const Home = () => {
     const navigate = useNavigate();
@@ -16,7 +17,7 @@ const Home = () => {
         <div className="relative h-screen flex items-center">
             <img
                 className="absolute right-0 top-[-20px] z-[-10] w-[270px] h-72 md:h-[640px] md:w-[700px] md:block hidden"
-                src="/src/assets/images/BlobShape.png"
+                src={orangeBolb}
                 alt="Blob Shape"
             />
 
