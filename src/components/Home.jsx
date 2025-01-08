@@ -32,7 +32,7 @@ const Home = () => {
                 alt="Dog Image Mobile"
             />
 
-            <div className="content flex items-center justify-start w-full h-full px-5 md:px-10 relative bottom-10 md:mt-0 mt-28">
+            <div className="content flex items-center justify-start w-full h-full px-5 md:px-10 relative bottom-10  md:mt-0 mt-32">
                 <div className="tagline w-full md:w-[600px] text-left ">
                     <motion.h1
                         variants={fadeIn('up', 0.2, 80)}
@@ -41,7 +41,7 @@ const Home = () => {
                         viewport={{ once: false, amount: 0.7 }}
                         className="text-3xl md:w-full md:mt-12 md:text-3xl"
                     >
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-800 via-sangGreen to-[#FF7F50] font-bold text-[60px] md:text-[80px] leading-[30px] md:leading-[90px]">
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-800 via-sangGreen to-[#FF7F50] font-bold text-[60px] md:text-[80px] leading-[50px] md:leading-[90px]">
                             Where dogs find their second family
                         </span>
                     </motion.h1>
