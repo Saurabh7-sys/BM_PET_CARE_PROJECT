@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { fadeIn } from '../variants';
 import { useNavigate } from 'react-router-dom';
 import HomeDogImage from '../assets/images/bg-img2.png'
+import HomePhoneImg from '../assets/images/appointmentDog.png'
 
 const Home = () => {
     const navigate = useNavigate();
@@ -27,7 +28,7 @@ const Home = () => {
 
             <img
                 className="absolute right-[110px] top-[-180px] z-[-10] block md:hidden h-[30rem] mt-9 "
-                src="/src/assets/images/appointmentDog.png"
+                src={HomePhoneImg}
                 alt="Dog Image Mobile"
             />
 
