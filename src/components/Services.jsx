@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo , useEffect} from 'react';
 import HomeBoardingImage from '../assets/images/HomeBoarding.jpg';
 import DogWalkImage from '../assets/images/DogWalk.jpg';
 import DogBathImage from '../assets/images/DogBath.jpg';
@@ -9,6 +9,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import '../index.css';
 import Button from './Button';
+import { Link } from 'react-router-dom';
 
 const cardData = [
     {
@@ -55,8 +56,11 @@ const Card = memo(({ card }) => (
             <div className="flex flex-col flex-grow p-4">
                 <h3 className="text-xl font-semibold mb-2">{card.title}</h3>
                 <p className="text-gray-700 mb-4 flex-grow">{card.description}</p>
-                <Button className="bg-orange-500 text-white hover:bg-orange-600 transition duration-300 mt-auto py-2 px-4" children={"Book Now"} />
-            </div>
+                <Link to={`/services/${encodeURIComponent(card.title)}`}>
+                  <Button className="bg-orange-500 text-white hover:bg-orange-600 transition duration-300 mt-auto py-2 px-4">
+                    Book Now
+                  </Button>
+                </Link>            </div>
         </div>
     </div>
 ));
@@ -88,7 +92,10 @@ const Services = () => {
             }
         ]
     };
-
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+    
     return (
         <div className=" h-screen p-6 flex justify-center items-center bg-[#FF7F50]">
             <div className="w-full max-w-[1200px]">
