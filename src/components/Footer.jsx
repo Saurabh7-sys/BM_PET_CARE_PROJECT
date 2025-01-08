@@ -32,6 +32,10 @@ const Footer = () => {
       <div className="mt-2 text-center text-xs text-gray-400">
         &copy; {new Date().getFullYear()} BM PET CARE. All rights reserved.
       </div>
+      <div className='text-gray-400 mt-2 text-center text-xs'>
+      Created by :  
+       <a href="https://www.linkedin.com/in/saurabh-shelar-851ab5216?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" className=' hover:text-white ml-1' >Saurabh Shelar</a>
+       </div>
     </footer>
   );
 };
