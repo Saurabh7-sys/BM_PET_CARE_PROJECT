@@ -34,7 +34,6 @@ const ServiceDetail = () => {
 const RoutesSetup = () => {
   return (
     <Routes>
-      <Route path="/" element={<Services />} />
       <Route path="/services/:title" element={<ServiceDetail />} />
     </Routes>
   );

@@ -14,7 +14,6 @@ const HomeBoarding = () => {
     const [withPickupDrop, setWithPickupDrop] = useState(false);
 
     useEffect(() => {
-        // Ensure the page scrolls to the top on navigation
         window.scrollTo(0, 0);
     }, []);
 

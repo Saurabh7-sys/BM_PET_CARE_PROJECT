@@ -77,6 +77,11 @@ const Appointment = () => {
     }
   };
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+
   return (
     <div className=" md:h-screen bg-[#FF7F50] flex justify-center items-center px-4 ">
       <div className="flex flex-col lg:flex-row w-full max-w-5xl bg-sand p-6 rounded-lg shadow-lg md:mb-14 m-4">
@@ -148,16 +153,16 @@ const Appointment = () => {
           </label>
 
           <label htmlFor="dateTime" className="block text-sm font-medium text-gray-700">
-  Date and Time:
-  <input
-    id="dateTime"
-    type="datetime-local"
-    onChange={handleDateTimeChange}
-    value={dateTime}
-    className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sangGreen focus:outline-none transition duration-200 ease-in-out"
-  />
-  {errors.dateTime && <p className="text-red-500 text-xs mt-1">{errors.dateTime}</p>}
-</label>
+            Date and Time:
+            <input
+              id="dateTime"
+              type="datetime-local"
+              onChange={handleDateTimeChange}
+              value={dateTime}
+              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sangGreen focus:outline-none transition duration-200 ease-in-out"
+            />
+            {errors.dateTime && <p className="text-red-500 text-xs mt-1">{errors.dateTime}</p>}
+          </label>
 
 
           <button
