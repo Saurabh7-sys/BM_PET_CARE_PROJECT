@@ -17,6 +17,8 @@ const DogWalker = () => {
   const [frequency, setFrequency] = useState('1');
   const [timePreference, setTimePreference] = useState('morning');
   const [days, setDays] = useState(1);
+  const [agreeTerms, setAgreeTerms] = useState(false);
+  const [showTermsModal, setShowTermsModal] = useState(false);
 
   useEffect(() => {
     const fetchBreeds = async () => {
@@ -35,7 +37,7 @@ const DogWalker = () => {
     e.preventDefault();
     let formIsValid = true;
     const newErrors = {};
-  
+
     if (!dogName) {
       newErrors.dogName = "Pet's name is required";
       formIsValid = false;
@@ -58,9 +60,14 @@ const DogWalker = () => {
         formIsValid = false;
       }
     }
-  
+
+    if (!agreeTerms) {
+      newErrors.terms = 'You must agree to the terms and conditions';
+      formIsValid = false;
+    }
+
     setErrors(newErrors);
-  
+
     if (formIsValid) {
       setShowPopup(true);
       setTimeout(() => {
@@ -72,7 +79,7 @@ const DogWalker = () => {
   const handleRegularWalkerChange = (e) => {
     if (e.target.checked) {
       setRegularWalker(true);
-      setTemporaryWalker(false); 
+      setTemporaryWalker(false);
     } else {
       setRegularWalker(false);
     }
@@ -81,17 +88,23 @@ const DogWalker = () => {
   const handleTemporaryWalkerChange = (e) => {
     if (e.target.checked) {
       setTemporaryWalker(true);
-      setRegularWalker(false); 
+      setRegularWalker(false);
     } else {
       setTemporaryWalker(false);
     }
   };
+
+  const closeModal = () => {
+    setShowTermsModal(false);
+  };
+
+  const openModal = () => {
+    setShowTermsModal(true);
+  };
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
-
-
 
   return (
     <div className="min-h-screen bg-[#FF7F50] flex justify-center items-center px-4">
@@ -174,93 +187,154 @@ const DogWalker = () => {
               {errors.dateTime && <p className="text-red-500 text-xs mt-1">{errors.dateTime}</p>}
             </label>
 
-            <label className="block text-sm font-medium text-gray-700">
-              Frequency:
-              <select
-                value={frequency}
-                onChange={(e) => setFrequency(e.target.value)}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
-              >
-                <option value="1">1 time a day</option>
-                <option value="2">2 times a day</option>
-              </select>
-            </label>
+            <div className="flex items-center space-x-4">
+              <label className="flex items-center text-sm font-medium text-gray-700">
+                <input
+                  type="checkbox"
+                  checked={regularWalker}
+                  onChange={handleRegularWalkerChange}
+                  className="mr-2"
+                />
+                Regular Walker
+              </label>
 
+              <label className="flex items-center text-sm font-medium text-gray-700">
+                <input
+                  type="checkbox"
+                  checked={temporaryWalker}
+                  onChange={handleTemporaryWalkerChange}
+                  className="mr-2"
+                />
+                Temporary Walker
+              </label>
+            </div>
 
-            {frequency === '1' && (
+            {temporaryWalker && (
               <label className="block text-sm font-medium text-gray-700">
-                Time Preference:
-                <select
-                  value={timePreference}
-                  onChange={(e) => setTimePreference(e.target.value)}
+                Number of Days:
+                <input
+                  type="number"
+                  value={days}
+                  onChange={(e) => setDays(e.target.value)}
                   className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
-                >
-                  <option value="morning">Morning</option>
-                  <option value="evening">Evening</option>
-                </select>
+                />
+                {errors.days && <p className="text-red-500 text-xs mt-1">{errors.days}</p>}
               </label>
             )}
 
-            <label className='flex items-center space-x-2 text-sm font-medium text-gray-700'>
-        <input
-          type="checkbox"
-          checked={regularWalker}
-          onChange={handleRegularWalkerChange}
-          className="rounded border-gray-300 text-sangGreen focus:ring-2 focus:ring-sangGreen"
-        />
-        <span>Regular Walker</span>
-      </label>
-      
-      <label className="flex items-center space-x-2 text-sm font-medium text-gray-700">
-        <input
-          type="checkbox"
-          checked={temporaryWalker}
-          onChange={handleTemporaryWalkerChange}
-          className="rounded border-gray-300 text-sangGreen focus:ring-2 focus:ring-sangGreen"
-        />
-        <span>Temporary Walker</span>
-      </label>
-
-            {temporaryWalker && (
-              <div className="space-y-4">
-
-
-                <label className="block text-sm font-medium text-gray-700">
-                  Number of days:
-                  <select
-                    value={days}
-                    onChange={(e) => setDays(e.target.value)}
-                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
-                  >
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                    <option value="12">12</option>
-                    <option value="13">13</option>
-                    <option value="14">14</option>
-                    <option value="15">15</option>
-                  </select>
-                </label>
-
-
-              </div>
-            )}
+            <div className="flex items-center space-x-2">
+              <input
+                type="checkbox"
+                checked={agreeTerms}
+                onChange={(e) => setAgreeTerms(e.target.checked)}
+                className="rounded border-gray-300 text-sangGreen focus:ring-2 focus:ring-sangGreen"
+              />
+              <span className="text-sm">
+                I agree to the{' '}
+                <a
+                  href="#terms"
+                  className="text-blue-600 underline"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    openModal();
+                  }}
+                >
+                  Terms and Conditions
+                </a>
+              </span>
+            </div>
+            {errors.terms && <p className="text-red-500 text-xs mt-1">{errors.terms}</p>}
           </div>
 
           <button
             type="submit"
             className="w-full bg-sangGreen text-white py-2 px-4 rounded-md hover:opacity-90 hover:shadow-lg transition-all duration-300"
+            disabled={!agreeTerms}
           >
             Confirm Walker
           </button>
         </form>
+
+        {showTermsModal && (
+          <div className="fixed inset-0 flex justify-center items-center bg-gray-800 bg-opacity-50 z-10">
+            <div className="bg-white p-6 rounded-lg shadow-xl max-w-3xl w-full">
+              <h3 className="text-xl font-semibold text-gray-800">Terms and Conditions</h3>
+              <p className="mt-2 text-sm text-gray-600">
+                {`Terms and Conditions for Dog Walking Services
+For Regular Walkers
+Regular dog walking services are provided with the following terms:
+
+Schedule:
+
+Walks are scheduled six days a week (Monday to Saturday).
+Sundays are excluded by default. However, if you wish to include Sunday walks, additional charges will apply.
+Payment Terms:
+
+Payment for regular walking services is to be made on a monthly basis at the start of the service period.
+Changes to Timing or Frequency:
+
+You may request changes to walking timings or frequency.
+While we will try our best to accommodate these requests, immediate adjustments cannot be guaranteed and depend on the availability of walkers.
+Cancellation or Service Disruption:
+
+Once the service begins, it cannot be delayed, paused, or canceled without prior notice.
+In the event of failure to adhere to payment terms or abrupt cancellations, we may be required to take legal action to resolve the matter.
+Pet’s Health and Behavior:
+
+It is essential that pet owners disclose any health conditions or behavioral issues their pet may have before the service begins. This information helps ensure the pet's safety and a smooth walking experience.
+Weather Policy:
+
+In case of extreme weather conditions (such as heavy rain or intense heat), walks may be rescheduled, shortened, or canceled for the safety of your pet.
+Owner’s Responsibilities:
+
+Pet owners must provide the necessary accessories for walks, including a leash, harness, and waste bags, unless agreed otherwise beforehand.
+For Temporary Walkers
+Temporary dog walking services are designed for short-term needs with the following conditions:
+
+Payment Terms:
+
+Payment for temporary walks must be made in advance, prior to the start of the service.
+Flexibility in Scheduling:
+
+You can request changes to the walking schedule, frequency, or days.
+While we will do our best to accommodate these requests, adjustments are subject to walker availability and cannot be guaranteed on short notice.
+We request at least 24-48 hours' notice for any schedule changes to minimize confusion.
+Cancellation Policy:
+
+Once two walks have been completed, the service cannot be canceled, and no refunds will be issued for those walks.
+If you decide not to continue after the first two walks, the cost of those walks will be deducted from your payment, and the remaining amount will be refunded.
+Pet’s Health and Behavior:
+
+Pet owners are required to disclose any health conditions or behavioral concerns prior to the service to ensure the safety of both the walker and the pet.
+Emergency Contact Information:
+
+Owners must provide emergency contact details and the pet’s veterinarian information to handle any unexpected situations during the walks.
+Weather Policy:
+
+For your pet’s safety, walks may be rescheduled, shortened, or canceled in extreme weather conditions such as storms or high heat.
+General Policies and Liability
+Safety and Well-Being:
+
+The safety, comfort, and well-being of your pet are our top priorities.
+Liability Limitations:
+
+While every precaution is taken to ensure a safe experience for your pet, we are not responsible for unforeseen incidents that are beyond our control.
+Feedback and Communication:
+
+We value your feedback and encourage you to share any concerns or suggestions. Open communication helps us improve our services and provide the best possible care for your pet.`}
+                Terms and Conditions for Dog Walking Services...
+              </p>
+              <div className="flex justify-end mt-4">
+                <button
+                  onClick={closeModal}
+                  className="px-4 py-2 bg-gray-600 text-white rounded-md"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
 
         <AnimatePresence>
           {showPopup && (
@@ -292,7 +366,7 @@ const DogWalker = () => {
                   />
                 </svg>
                 <h3 className="text-xl font-semibold text-green-600">
-                Confirmed Walker!
+                  Confirmed Walker!
                 </h3>
                 <p className="text-gray-600 mt-2">
                   Your Walker has been successfully booked.
