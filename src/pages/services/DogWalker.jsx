@@ -12,11 +12,11 @@ const DogWalker = () => {
   const [dateTime, setDateTime] = useState('');
   const [errors, setErrors] = useState({});
   const [showPopup, setShowPopup] = useState(false);
+  const [regularWalker, setRegularWalker] = useState(false);
   const [temporaryWalker, setTemporaryWalker] = useState(false);
-  const [startDate, setStartDate] = useState('');
-  const [startTime, setStartTime] = useState('');
   const [frequency, setFrequency] = useState('1');
   const [timePreference, setTimePreference] = useState('morning');
+  const [days, setDays] = useState(1);
 
   useEffect(() => {
     const fetchBreeds = async () => {
@@ -35,7 +35,7 @@ const DogWalker = () => {
     e.preventDefault();
     let formIsValid = true;
     const newErrors = {};
-
+  
     if (!dogName) {
       newErrors.dogName = "Pet's name is required";
       formIsValid = false;
@@ -53,18 +53,14 @@ const DogWalker = () => {
       formIsValid = false;
     }
     if (temporaryWalker) {
-      if (!startDate) {
-        newErrors.startDate = 'Start date is required for temporary walking';
-        formIsValid = false;
-      }
-      if (!startTime) {
-        newErrors.startTime = 'Start time is required for temporary walking';
+      if (!days) {
+        newErrors.days = 'Number of days is required for temporary walking';
         formIsValid = false;
       }
     }
-
+  
     setErrors(newErrors);
-
+  
     if (formIsValid) {
       setShowPopup(true);
       setTimeout(() => {
@@ -72,6 +68,30 @@ const DogWalker = () => {
       }, 3000);
     }
   };
+
+  const handleRegularWalkerChange = (e) => {
+    if (e.target.checked) {
+      setRegularWalker(true);
+      setTemporaryWalker(false); 
+    } else {
+      setRegularWalker(false);
+    }
+  };
+
+  const handleTemporaryWalkerChange = (e) => {
+    if (e.target.checked) {
+      setTemporaryWalker(true);
+      setRegularWalker(false); 
+    } else {
+      setTemporaryWalker(false);
+    }
+  };
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+
+
 
   return (
     <div className="min-h-screen bg-[#FF7F50] flex justify-center items-center px-4">
@@ -154,69 +174,82 @@ const DogWalker = () => {
               {errors.dateTime && <p className="text-red-500 text-xs mt-1">{errors.dateTime}</p>}
             </label>
 
-            <label className="flex items-center space-x-2 text-sm font-medium text-gray-700">
-              <input
-                type="checkbox"
-                checked={temporaryWalker}
-                onChange={(e) => setTemporaryWalker(e.target.checked)}
-                className="rounded border-gray-300 text-sangGreen focus:ring-2 focus:ring-sangGreen"
-              />
-              <span>Temporary Walker</span>
+            <label className="block text-sm font-medium text-gray-700">
+              Frequency:
+              <select
+                value={frequency}
+                onChange={(e) => setFrequency(e.target.value)}
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
+              >
+                <option value="1">1 time a day</option>
+                <option value="2">2 times a day</option>
+              </select>
             </label>
+
+
+            {frequency === '1' && (
+              <label className="block text-sm font-medium text-gray-700">
+                Time Preference:
+                <select
+                  value={timePreference}
+                  onChange={(e) => setTimePreference(e.target.value)}
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
+                >
+                  <option value="morning">Morning</option>
+                  <option value="evening">Evening</option>
+                </select>
+              </label>
+            )}
+
+            <label className='flex items-center space-x-2 text-sm font-medium text-gray-700'>
+        <input
+          type="checkbox"
+          checked={regularWalker}
+          onChange={handleRegularWalkerChange}
+          className="rounded border-gray-300 text-sangGreen focus:ring-2 focus:ring-sangGreen"
+        />
+        <span>Regular Walker</span>
+      </label>
+      
+      <label className="flex items-center space-x-2 text-sm font-medium text-gray-700">
+        <input
+          type="checkbox"
+          checked={temporaryWalker}
+          onChange={handleTemporaryWalkerChange}
+          className="rounded border-gray-300 text-sangGreen focus:ring-2 focus:ring-sangGreen"
+        />
+        <span>Temporary Walker</span>
+      </label>
 
             {temporaryWalker && (
               <div className="space-y-4">
-                <label className="block text-sm font-medium text-gray-700">
-                  Start Date:
-                  <input
-                    type="date"
-                    value={startDate}
-                    onChange={(e) => setStartDate(e.target.value)}
-                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
-                  />
-                  {errors.startDate && (
-                    <p className="text-red-500 text-xs mt-1">{errors.startDate}</p>
-                  )}
-                </label>
+
 
                 <label className="block text-sm font-medium text-gray-700">
-                  Start Time:
-                  <input
-                    type="time"
-                    value={startTime}
-                    onChange={(e) => setStartTime(e.target.value)}
-                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
-                  />
-                  {errors.startTime && (
-                    <p className="text-red-500 text-xs mt-1">{errors.startTime}</p>
-                  )}
-                </label>
-
-                <label className="block text-sm font-medium text-gray-700">
-                  Frequency:
+                  Number of days:
                   <select
-                    value={frequency}
-                    onChange={(e) => setFrequency(e.target.value)}
+                    value={days}
+                    onChange={(e) => setDays(e.target.value)}
                     className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
                   >
-                    <option value="1">1 time a day</option>
-                    <option value="2">2 times a day</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
                   </select>
                 </label>
 
-                {frequency === '1' && (
-                  <label className="block text-sm font-medium text-gray-700">
-                    Time Preference:
-                    <select
-                      value={timePreference}
-                      onChange={(e) => setTimePreference(e.target.value)}
-                      className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
-                    >
-                      <option value="morning">Morning</option>
-                      <option value="evening">Evening</option>
-                    </select>
-                  </label>
-                )}
+
               </div>
             )}
           </div>
@@ -225,7 +258,7 @@ const DogWalker = () => {
             type="submit"
             className="w-full bg-sangGreen text-white py-2 px-4 rounded-md hover:opacity-90 hover:shadow-lg transition-all duration-300"
           >
-            Schedule It
+            Confirm Walker
           </button>
         </form>
 
@@ -259,10 +292,10 @@ const DogWalker = () => {
                   />
                 </svg>
                 <h3 className="text-xl font-semibold text-green-600">
-                  Appointment Scheduled!
+                Confirmed Walker!
                 </h3>
                 <p className="text-gray-600 mt-2">
-                  Your appointment has been successfully booked.
+                  Your Walker has been successfully booked.
                 </p>
               </motion.div>
             </motion.div>
