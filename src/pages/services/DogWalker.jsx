@@ -256,85 +256,109 @@ const DogWalker = () => {
         </form>
 
         {showTermsModal && (
-          <div className="fixed inset-0 flex justify-center items-center bg-gray-800 bg-opacity-50 z-10">
-            <div className="bg-white p-6 rounded-lg shadow-xl max-w-3xl w-full">
-              <h3 className="text-xl font-semibold text-gray-800">Terms and Conditions</h3>
-              <p className="mt-2 text-sm text-gray-600">
-                {`Terms and Conditions for Dog Walking Services
-For Regular Walkers
-Regular dog walking services are provided with the following terms:
+  <div className="fixed inset-0 flex justify-center items-center bg-gray-800 bg-opacity-50 z-10">
+    <div className="bg-white p-6 rounded-lg shadow-xl w-[90%] sm:w-[80%] md:w-[70%] lg:w-[60%] xl:w-[50%] max-w-[800px] max-h-[90vh] overflow-auto relative">
+      <h3 className="text-xl font-semibold text-gray-800">Terms and Conditions</h3>
+      <p className="mt-2 text-sm text-gray-600">
+        {`Terms and Conditions for Dog Walking Services
+        For Regular Walkers
+        Regular dog walking services are provided with the following terms:
 
-Schedule:
+        Schedule:
 
-Walks are scheduled six days a week (Monday to Saturday).
-Sundays are excluded by default. However, if you wish to include Sunday walks, additional charges will apply.
-Payment Terms:
+        Walks are scheduled six days a week (Monday to Saturday).
+        Sundays are excluded by default. However, if you wish to include Sunday walks, additional charges will apply.
+        Payment Terms:
 
-Payment for regular walking services is to be made on a monthly basis at the start of the service period.
-Changes to Timing or Frequency:
+        Payment for regular walking services is to be made on a monthly basis at the start of the service period.
+        Changes to Timing or Frequency:
 
-You may request changes to walking timings or frequency.
-While we will try our best to accommodate these requests, immediate adjustments cannot be guaranteed and depend on the availability of walkers.
-Cancellation or Service Disruption:
+        You may request changes to walking timings or frequency.
+        While we will try our best to accommodate these requests, immediate adjustments cannot be guaranteed and depend on the availability of walkers.
+        Cancellation or Service Disruption:
 
-Once the service begins, it cannot be delayed, paused, or canceled without prior notice.
-In the event of failure to adhere to payment terms or abrupt cancellations, we may be required to take legal action to resolve the matter.
-Pet’s Health and Behavior:
+        Once the service begins, it cannot be delayed, paused, or canceled without prior notice.
+        In the event of failure to adhere to payment terms or abrupt cancellations, we may be required to take legal action to resolve the matter.
+        Pet’s Health and Behavior:
 
-It is essential that pet owners disclose any health conditions or behavioral issues their pet may have before the service begins. This information helps ensure the pet's safety and a smooth walking experience.
-Weather Policy:
+        It is essential that pet owners disclose any health conditions or behavioral issues their pet may have before the service begins. This information helps ensure the pet's safety and a smooth walking experience.
+        Weather Policy:
 
-In case of extreme weather conditions (such as heavy rain or intense heat), walks may be rescheduled, shortened, or canceled for the safety of your pet.
-Owner’s Responsibilities:
+        In case of extreme weather conditions (such as heavy rain or intense heat), walks may be rescheduled, shortened, or canceled for the safety of your pet.
+        Owner’s Responsibilities:
 
-Pet owners must provide the necessary accessories for walks, including a leash, harness, and waste bags, unless agreed otherwise beforehand.
-For Temporary Walkers
-Temporary dog walking services are designed for short-term needs with the following conditions:
+        Pet owners must provide the necessary accessories for walks, including a leash, harness, and waste bags, unless agreed otherwise beforehand.
+        For Temporary Walkers
+        Temporary dog walking services are designed for short-term needs with the following conditions:
 
-Payment Terms:
+        Payment Terms:
 
-Payment for temporary walks must be made in advance, prior to the start of the service.
-Flexibility in Scheduling:
+        Payment for temporary walks must be made in advance, prior to the start of the service.
+        Flexibility in Scheduling:
 
-You can request changes to the walking schedule, frequency, or days.
-While we will do our best to accommodate these requests, adjustments are subject to walker availability and cannot be guaranteed on short notice.
-We request at least 24-48 hours' notice for any schedule changes to minimize confusion.
-Cancellation Policy:
+        You can request changes to the walking schedule, frequency, or days.
+        While we will do our best to accommodate these requests, adjustments are subject to walker availability and cannot be guaranteed on short notice.
+        We request at least 24-48 hours' notice for any schedule changes to minimize confusion.
+        Cancellation Policy:
 
-Once two walks have been completed, the service cannot be canceled, and no refunds will be issued for those walks.
-If you decide not to continue after the first two walks, the cost of those walks will be deducted from your payment, and the remaining amount will be refunded.
-Pet’s Health and Behavior:
+        Once two walks have been completed, the service cannot be canceled, and no refunds will be issued for those walks.
+        If you decide not to continue after the first two walks, the cost of those walks will be deducted from your payment, and the remaining amount will be refunded.
+        Pet’s Health and Behavior:
 
-Pet owners are required to disclose any health conditions or behavioral concerns prior to the service to ensure the safety of both the walker and the pet.
-Emergency Contact Information:
+        Pet owners are required to disclose any health conditions or behavioral concerns prior to the service to ensure the safety of both the walker and the pet.
+        Emergency Contact Information:
 
-Owners must provide emergency contact details and the pet’s veterinarian information to handle any unexpected situations during the walks.
-Weather Policy:
+        Owners must provide emergency contact details and the pet’s veterinarian information to handle any unexpected situations during the walks.
+        Weather Policy:
 
-For your pet’s safety, walks may be rescheduled, shortened, or canceled in extreme weather conditions such as storms or high heat.
-General Policies and Liability
-Safety and Well-Being:
+        For your pet’s safety, walks may be rescheduled, shortened, or canceled in extreme weather conditions such as storms or high heat.
+        General Policies and Liability
+        Safety and Well-Being:
 
-The safety, comfort, and well-being of your pet are our top priorities.
-Liability Limitations:
+        The safety, comfort, and well-being of your pet are our top priorities.
+        Liability Limitations:
 
-While every precaution is taken to ensure a safe experience for your pet, we are not responsible for unforeseen incidents that are beyond our control.
-Feedback and Communication:
+        While every precaution is taken to ensure a safe experience for your pet, we are not responsible for unforeseen incidents that are beyond our control.
+        Feedback and Communication:
 
-We value your feedback and encourage you to share any concerns or suggestions. Open communication helps us improve our services and provide the best possible care for your pet.`}
-                Terms and Conditions for Dog Walking Services...
-              </p>
-              <div className="flex justify-end mt-4">
-                <button
-                  onClick={closeModal}
-                  className="px-4 py-2 bg-gray-600 text-white rounded-md"
-                >
-                  Close
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
+        We value your feedback and encourage you to share any concerns or suggestions. Open communication helps us improve our services and provide the best possible care for your pet.`}
+      </p>
+
+      <div
+        onClick={() => {
+          const bottom = document.getElementById("modal-footer");
+          bottom?.scrollIntoView({ behavior: "smooth" });
+        }}
+        className="absolute bottom-16 right-4 cursor-pointer bg-gray-800 p-2 rounded-full shadow-md hover:bg-gray-700  transition duration-300 opacity-50 hover:opacity-75"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          className="w-8 h-8 text-white"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M19 9l-7 7-7-7"
+          />
+        </svg>
+      </div>
+
+      <div id="modal-footer" className="flex justify-end mt-4">
+        <button
+          onClick={closeModal}
+          className="px-4 py-2 bg-gray-600 text-white rounded-md"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+
 
         <AnimatePresence>
           {showPopup && (
