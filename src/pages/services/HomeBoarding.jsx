@@ -12,9 +12,9 @@ const HomeBoarding = () => {
   const [dropTime, setDropTime] = useState("");
   const [sameAsPickup, setSameAsPickup] = useState(false);
   const [withPickupDrop, setWithPickupDrop] = useState(false);
-  const [termsAccepted, setTermsAccepted] = useState(false); // New state for terms acceptance
+  const [termsAccepted, setTermsAccepted] = useState(false); 
 
-  const [showTermsModal, setShowTermsModal] = useState(false); // Modal state
+  const [showTermsModal, setShowTermsModal] = useState(false); 
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -54,7 +54,7 @@ const HomeBoarding = () => {
 
     if (!termsAccepted) {
       alert("Please accept the Terms and Conditions.");
-      return; // Prevent form submission unless terms are accepted
+      return; 
     }
 
     calculatePrice(startDate, endDate);
@@ -78,7 +78,6 @@ const HomeBoarding = () => {
         <h2 className="text-4xl font-bold mb-6 text-center text-black">Home Boarding</h2>
 
         <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Existing Form Fields */}
           <div>
             <label htmlFor="start-date" className="block text-lg font-medium text-gray-700">
               Start Date & Time
@@ -121,7 +120,6 @@ const HomeBoarding = () => {
             />
           </div>
 
-          {/* Pickup & Drop Option */}
           <div className="flex items-center space-x-3">
             <input
               type="checkbox"
@@ -211,7 +209,6 @@ const HomeBoarding = () => {
             </div>
           )}
 
-          {/* Terms and Conditions Checkbox */}
           <div className="flex items-center space-x-3">
             <input
               type="checkbox"
@@ -246,7 +243,6 @@ const HomeBoarding = () => {
           />
         </div>
 
-        {/* Terms Modal */}
         {showTermsModal && (
           <div className="fixed inset-0 flex justify-center items-center bg-gray-800 bg-opacity-50 z-10">
             <div className="bg-white p-6 rounded-lg shadow-xl w-[90%] sm:w-[80%] md:w-[70%] lg:w-[60%] xl:w-[50%] max-w-[800px] max-h-[90vh] overflow-auto relative">
@@ -308,6 +304,28 @@ Thank you for choosing our home boarding service! Your pet’s comfort and safet
 
 
               </p>
+              <div
+        onClick={() => {
+          const bottom = document.getElementById("modal-footer");
+          bottom?.scrollIntoView({ behavior: "smooth" });
+        }}
+        className="absolute bottom-16 right-4 cursor-pointer bg-gray-800 p-2 rounded-full shadow-md hover:bg-gray-700  transition duration-300 opacity-50 hover:opacity-75"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          className="w-8 h-8 text-white"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M19 9l-7 7-7-7"
+          />
+        </svg>
+      </div>
               <div className="flex justify-end mt-4">
                 <button
                   onClick={handleCloseModal}

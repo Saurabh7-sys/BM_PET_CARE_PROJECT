@@ -1,15 +1,15 @@
-import React, { memo , useEffect} from 'react';
+import React, { memo, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import HomeBoardingImage from '../assets/images/HomeBoarding.jpg';
 import DogWalkImage from '../assets/images/DogWalk.jpg';
 import DogBathImage from '../assets/images/DogBath.jpg';
 import DogFoodImage from '../assets/images/DogFood.jpg';
 import PickupAndDrop from '../assets/images/PickupAndDrop.jpg';
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import Slider from "react-slick";
 import '../index.css';
 import Button from './Button';
 import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+
 
 const cardData = [
     {
@@ -45,7 +45,12 @@ const cardData = [
 ];
 
 const Card = memo(({ card }) => (
-    <div key={card.id} className="p-4">
+    <motion.div 
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+        key={card.id} 
+        className="p-4"
+    >
         <div className="bg-white p-4 rounded-lg shadow-lg flex flex-col" style={{ height: '450px', width: '100%' }}>
             <img
                 src={card.image}
@@ -60,52 +65,36 @@ const Card = memo(({ card }) => (
                   <Button className="bg-orange-500 text-white hover:bg-orange-600 transition duration-300 mt-auto py-2 px-4">
                     Book Now
                   </Button>
-                </Link>            </div>
+                </Link>
+            </div>
         </div>
-    </div>
+    </motion.div>
 ));
 
 const Services = () => {
-    const settings = {
-        dots: true,
-        infinite: true,
-        speed: 1500,
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        autoplay: true,
-        autoplaySpeed: 2000,
-        arrows: true,
-        responsive: [
-            {
-                breakpoint: 768,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
-                }
-            },
-            {
-                breakpoint: 1024,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 1,
-                }
-            }
-        ]
-    };
+
+
+    const location = useLocation();
+
+    useEffect(() => {
+        // After page load, scroll to the services section
+        const section = document.getElementById('services');
+        if (section) {
+            section.scrollIntoView({ behavior: 'smooth' });
+        }
+    }, [location]);
+    
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
     
     return (
-        <div className=" h-screen p-6 flex justify-center items-center bg-[#FF7F50]">
-            <div className="w-full max-w-[1200px]">
+        <div className="min-h-screen p-6 bg-[#FF7F50]">
             <h2 className="text-3xl font-bold text-center mb-6 text-black">Services</h2>
-
-                <Slider {...settings}>
-                    {cardData.map(card => (
-                        <Card card={card} key={card.id} />
-                    ))}
-                </Slider>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-[1200px] mx-auto">
+                {cardData.map(card => (
+                    <Card card={card} key={card.id} />
+                ))}
             </div>
         </div>
     );
