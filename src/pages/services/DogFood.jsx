@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 const DogFood = () => {
+  // State for allergy form
   const [dogName, setDogName] = useState('');
   const [age, setAge] = useState('');
   const [allergies, setAllergies] = useState({
@@ -11,14 +12,17 @@ const DogFood = () => {
   });
   const [preferences, setPreferences] = useState([]);
 
+  // State for cart
   const [cart, setCart] = useState([]);
 
+  // Dog food menu items with pricing in Rupees
   const foodItems = [
-    { name: 'Chicken Meal', description: 'Healthy chicken-based food.', price: 10 },
-    { name: 'Beef Meal', description: 'Nutritious beef meal for your dog.', price: 12 },
-    { name: 'Vegetarian Meal', description: 'Grain-free vegetarian food.', price: 8 },
+    { name: 'Chicken Meal', description: 'Healthy chicken-based food.', price: 500 }, // Price in Rupees
+    { name: 'Beef Meal', description: 'Nutritious beef meal for your dog.', price: 600 },
+    { name: 'Vegetarian Meal', description: 'Grain-free vegetarian food.', price: 400 },
   ];
 
+  // Handle allergy form changes
   const handleAllergyChange = (e) => {
     const { name, checked } = e.target;
     setAllergies(prev => ({
@@ -36,20 +40,27 @@ const DogFood = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // Logic for form submission or filtering food items based on allergies
     console.log({ dogName, age, allergies, preferences });
   };
 
+  // Add food to cart
   const addToCart = (food) => {
     setCart((prev) => [...prev, food]);
   };
 
-   useEffect(() => {
-      window.scrollTo(0, 0);
-    }, []);
+  // Remove food from cart
+  const removeFromCart = (index) => {
+    const newCart = [...cart];
+    newCart.splice(index, 1); // Remove the item at the given index
+    setCart(newCart);
+  };
+
   return (
     <div className="container mx-auto p-6">
       <h1 className="text-3xl font-bold text-center mb-8">Homemade Dog Food</h1>
 
+      {/* Allergy & Preference Form */}
       <div className="bg-white p-6 rounded-lg shadow-md mb-12">
         <h2 className="text-2xl font-semibold mb-4">Tell Us About Your Dog</h2>
         <form onSubmit={handleSubmit}>
@@ -117,13 +128,14 @@ const DogFood = () => {
           </div>
           <button
             type="submit"
-            className="w-full py-3 bg-orange-600 text-black rounded-lg hover:bg-orange-700 transition duration-200"
+            className="w-full py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-200"
           >
             Submit
           </button>
         </form>
       </div>
 
+      {/* Dog Food Menu */}
       <h2 className="text-2xl font-semibold mb-6">Dog Food Menu</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {foodItems.map((food) => (
@@ -133,7 +145,7 @@ const DogFood = () => {
           >
             <h3 className="text-xl font-bold">{food.name}</h3>
             <p className="text-gray-700 my-2">{food.description}</p>
-            <p className="font-semibold text-lg">${food.price}</p>
+            <p className="font-semibold text-lg">₹{food.price}</p> {/* Price in Rupees */}
             <button
               onClick={() => addToCart(food)}
               className="mt-4 py-2 px-4 bg-green-600 text-white rounded-lg hover:bg-green-700 transition duration-200"
@@ -144,6 +156,7 @@ const DogFood = () => {
         ))}
       </div>
 
+      {/* Cart */}
       {cart.length > 0 && (
         <div className="mt-12 p-6 bg-gray-100 rounded-lg shadow-md">
           <h2 className="text-2xl font-semibold mb-4">Your Cart</h2>
@@ -151,12 +164,20 @@ const DogFood = () => {
             {cart.map((item, index) => (
               <li key={index} className="flex justify-between py-2 border-b border-gray-300">
                 <span>{item.name}</span>
-                <span>${item.price}</span>
+                <span>₹{item.price}</span>
+                <button
+                  onClick={() => removeFromCart(index)}
+                  className="text-red-600 hover:text-red-700 transition duration-200"
+                >
+                  Remove
+                </button>
               </li>
             ))}
           </ul>
           <div className="mt-4 text-right">
-            <span className="text-xl font-semibold">Total: ${cart.reduce((total, item) => total + item.price, 0)}</span>
+            <span className="text-xl font-semibold">
+              Total: ₹{cart.reduce((total, item) => total + item.price, 0)}
+            </span>
           </div>
         </div>
       )}
