@@ -1,18 +1,17 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { Routes, Route, useParams } from 'react-router-dom';
+import Services from '../components/Services';
 import HomeBoarding from '../pages/services/HomeBoarding';
 import DogWalker from '../pages/services/DogWalker';
 import PickupDrop from '../pages/services/PickupDrop';
+import DogFood from '../pages/services/DogFood'
 import PawSpa from '../pages/services/PawSpa';
-import DogFood from '../pages/services/DogFood';
 
 const ServiceDetail = () => {
-  const { title } = useParams();
+  const { title } = useParams();  
   let Component;
 
-  const decodedTitle = decodeURIComponent(title);
-
-  switch (decodedTitle) {
+  switch (decodeURIComponent(title)) {
     case 'Home Boarding':
       Component = HomeBoarding;
       break;
@@ -22,11 +21,11 @@ const ServiceDetail = () => {
     case 'Pick-Up & Drop-Off':
       Component = PickupDrop;
       break;
-    case 'PawSpa':
-      Component = PawSpa;
-      break;
     case 'Homemade Dog Food':
       Component = DogFood;
+      break;
+    case 'PawSpa':
+      Component = PawSpa;
       break;
     default:
       Component = () => <div>Service Not Found</div>;
@@ -36,4 +35,12 @@ const ServiceDetail = () => {
   return <Component />;
 };
 
-export default ServiceDetail;
+const RoutesSetup = () => {
+  return (
+    <Routes>
+      <Route path="/services/:title" element={<ServiceDetail />} />
+    </Routes>
+  );
+};
+
+export default RoutesSetup;
