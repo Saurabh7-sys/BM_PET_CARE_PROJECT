@@ -1,5 +1,4 @@
 import React, { memo, useEffect } from 'react';
-import { motion } from 'framer-motion';
 import HomeBoardingImage from '../assets/images/HomeBoarding.jpg';
 import DogWalkImage from '../assets/images/DogWalk.jpg';
 import DogBathImage from '../assets/images/DogBath.jpg';
@@ -9,7 +8,6 @@ import '../index.css';
 import Button from './Button';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
-
 
 const cardData = [
     {
@@ -45,49 +43,44 @@ const cardData = [
 ];
 
 const Card = memo(({ card }) => (
-    <motion.div 
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-        key={card.id} 
-        className="p-4"
+    <div
+        key={card.id}
+        className="p-4 transition-all duration-300 hover:border-orange-500 hover:border-2 hover:shadow-xl hover:bg-white"
     >
         <div className="bg-white p-4 rounded-lg shadow-lg flex flex-col" style={{ height: '450px', width: '100%' }}>
             <img
                 src={card.image}
                 alt={card.title}
-                className="w-full h-48 object-cover rounded-t-lg"
+                className="w-full h-48 object-cover rounded-t-lg transition-all duration-300 hover:opacity-80"
                 loading="lazy"
             />
             <div className="flex flex-col flex-grow p-4">
                 <h3 className="text-xl font-semibold mb-2">{card.title}</h3>
                 <p className="text-gray-700 mb-4 flex-grow">{card.description}</p>
                 <Link to={`/services/${encodeURIComponent(card.title)}`}>
-                  <Button className="bg-orange-500 text-white hover:bg-orange-600 transition duration-300 mt-auto py-2 px-4">
-                    Book Now
-                  </Button>
+                    <Button className="bg-orange-500 text-white hover:bg-orange-600 transition duration-300 mt-auto py-2 px-4">
+                        Book Now
+                    </Button>
                 </Link>
             </div>
         </div>
-    </motion.div>
+    </div>
 ));
 
 const Services = () => {
-
-
     const location = useLocation();
 
     useEffect(() => {
-        // After page load, scroll to the services section
         const section = document.getElementById('services');
         if (section) {
             section.scrollIntoView({ behavior: 'smooth' });
         }
     }, [location]);
-    
+
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
-    
+
     return (
         <div className="min-h-screen p-6 bg-[#FF7F50]">
             <h2 className="text-3xl font-bold text-center mb-6 text-black">Services</h2>
