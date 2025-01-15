@@ -1,4 +1,4 @@
-import React from 'react';
+import React ,{useEffect} from 'react';
 
 const PawSpa = () => {
     const packages = [
@@ -6,6 +6,11 @@ const PawSpa = () => {
         { name: 'Spa + Hair Cut', price: ' ₹1500' },
         { name: 'Spa + Hair Cut + Nails Cut', price: ' ₹2000' }
     ];
+
+      useEffect(() => {
+        window.scrollTo(0, 0);
+      }, []);
+    
 
     return (
         <div className="p-8 bg-sage min-h-screen">

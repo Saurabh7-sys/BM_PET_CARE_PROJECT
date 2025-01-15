@@ -5,6 +5,13 @@ import { motion } from 'framer-motion';
 import { fadeIn } from '../variants';
 
 const Contact = () => {
+
+  const phoneNumber = "+918369101021";
+
+  const emailAddress = "saurabhshelar512@gmail.com";
+  const subject = "Hello!";
+  const body = "I would like to get in touch with you.";
+
   return (
     <div className="md:h-screen h-[1300px] bg-cover bg-center flex items-center justify-center px-4">
       <div className="main w-full max-w-[1200px] md:h-auto h-[1150px] bg-white bg-opacity-40 rounded-lg shadow-2xl p-6 md:p-8 flex flex-col gap-8 items-center md:items-start md:mt-12">
@@ -23,34 +30,39 @@ const Contact = () => {
             </div>
 
             <div className="flex flex-col gap-6 text-center md:text-left w-full">
-              <motion.div 
-              variants={fadeIn('right', 0.2, 50)}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: false, amount: 0.7 }}
-              
-              className="card flex flex-col items-center md:items-start gap-4">
+              <motion.div
+                variants={fadeIn('right', 0.2, 50)}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: false, amount: 0.7 }}
+
+                className="card flex flex-col items-center md:items-start gap-4">
                 <h2 className="text-xl font-medium">Get In Touch</h2>
-                 <Button
-                  bgColor="bg-gray-800"
-                  children="Talk to Our Team"
-                  className="text-white hover:bg-gray-900"
-                />
-                
+                <a href={`tel:${phoneNumber}`}>
+                  <Button
+                    bgColor="bg-gray-800"
+                    children="Talk to Our Team"
+                    className="text-white hover:bg-gray-900"
+                  />
+                </a>
+
               </motion.div>
-              <motion.div 
-              variants={fadeIn('left', 0.2, 50)}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: false, amount: 0.7 }}
-              
-               className="card flex flex-col items-center md:items-start gap-4">
+              <motion.div
+                variants={fadeIn('left', 0.2, 50)}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: false, amount: 0.7 }}
+
+                className="card flex flex-col items-center md:items-start gap-4">
                 <h2 className="text-xl font-medium">Need Help with Your Dog?</h2>
-                <Button
-                  bgColor="bg-gray-800"
-                  children="See How We Can Help"
-                  className="text-white hover:bg-gray-900"
-                />
+                <a href={`mailto:${emailAddress}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`}>
+
+                  <Button
+                    bgColor="bg-gray-800"
+                    children="See How We Can Help"
+                    className="text-white hover:bg-gray-900"
+                  />
+                </a>
               </motion.div>
             </div>
           </div>
